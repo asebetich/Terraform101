@@ -1,26 +1,24 @@
-name: Dev-infrastructure (run 2nd)
-on: #Initial deployment must be manual. After initial deployment, Lines 4 - 7 will replace lines 2-3 
-  workflow_dispatch
-# on:
-#   workflow_run:
-#     workflows: ["BuildTestStage-apiWebApp (run 1st)"]
-#     types: [completed]
+# Workflow (pipeline) example for Azure Resource Deployments using Terraform
+name: Env-infrastructure
+on:
+  workflow_dispatch #Establishes only manual triggers will run pipeline
+
 env:
-  infraDirectory:       'tf-infrastructure'
-  terraformVersion:     '0.14.11'
+  infraDirectory:       '/' #Change the terraform folder location to reflect the appropriate file location if applicable
+  terraformVersion:     '0.14.11' #Establish the Terraform versioning
   resourceGroup:        '' #Update
   storageAccountName:   '' #Update
   storageContainerName: '' #Update
-  storageKey:           '.tfstate' #Update and name the .tfstate file to reflect environment
-  variableFile:         '--var-file="dev-env/terraform.tfvars"' #Change the terraform folder location to reflect the environment if applicable
-  subscription_id:      ${{ secrets.subscription_id }}
-  client_id:            ${{ secrets.client_id }}
-  client_secret:        ${{ secrets.client_secret }}
-  tenant_id:            ${{ secrets.tenant_id }} 
+  storageKey:           'Env-Resources.tfstate' #Update and name the .tfstate file to reflect environment
+  variableFile:         '--var-file="terraform.tfvars"' #Change the terraform folder location to reflect the environment if applicable
+  subscription_id:      ${{ secrets.subscription_id }} #Azure Subscription ID
+  client_id:            ${{ secrets.client_id }}       #Azure Service Principal Client ID
+  client_secret:        ${{ secrets.client_secret }}   #Azure Service Principal Client Secret
+  tenant_id:            ${{ secrets.tenant_id }}       #Azure Tenant ID
   
 jobs:
-  Terraform_Plan:
-    runs-on: 'ubuntu-latest'
+  Terraform_Plan: 
+    runs-on: 'ubuntu-latest' #Specify Agent OS
     needs: []
     if: always()
     steps:
@@ -31,7 +29,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }} #Navigate to the README for process of creation link. This is used for authentication into Azure
         enable-AzPSSession: true
 
-    - name: Replace tokens
+    - name: Replace tokens 
       uses: cschleiden/replace-tokens@v1.0
       with:
         tokenPrefix: '!__'
