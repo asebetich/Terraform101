@@ -16,4 +16,4 @@ The following files are created within this demonstration:
     3. Terraform.tfvars files allow organizations to use the same configuration files, but change values
 
 # Pipeline Related Information
-Creation of a "Service Principal" in Azure reference material found here[https://github.com/Azure/login#configure-deployment-credentials]
+Creation of a "Service Principal" in Azure reference material found [here](https://github.com/Azure/login#configure-deployment-credentials)
