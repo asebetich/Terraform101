@@ -14,3 +14,6 @@ The following files are created within this demonstration:
     1. The Terraform.tfvars file is used to define values established in the Variables.tf file
     2. Configuration files (Main.tf and Variables.tf) can be provided different information with each terraform.tfvars file identified
     3. Terraform.tfvars files allow organizations to use the same configuration files, but change values
+
+# Pipeline Related Information
+Creation of a "Service Principal" in Azure reference material found here[https://github.com/Azure/login#configure-deployment-credentials]
